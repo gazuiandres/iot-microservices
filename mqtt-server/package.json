@@ -1,0 +1,15 @@
+{
+  "name": "mqtt-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aedes": "^0.49.0"
+  }
+}
