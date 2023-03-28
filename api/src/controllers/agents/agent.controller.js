@@ -1,18 +1,30 @@
 
 function setupController(service) {
-    async function getAll (req, res) {
-        const response = await service.getAll()
-        res.json(response)
+    async function getAll(req, res, next) {
+        try {
+            const response = await service.getAll()
+            res.json(response)
+        } catch (error) {
+            next(error)
+        }
     }
 
-    async function getOne (req, res) {
-        const response = await service.getOne(req.params)
-        res.json(response)
+    async function getOne(req, res, next) {
+        try {
+            const response = await service.getOne(req.params)
+            res.json(response)
+        } catch (error) {
+            next(error)
+        }
     }
 
-    async function createOrUpdate (req, res) {
-        const response = await service.createOrUpdate(req.body)
-        res.json(response)
+    async function createOrUpdate(req, res, next) {
+        try {
+            const response = await service.createOrUpdate(req.body)
+            res.json(response)
+        } catch (error) {
+            next(error)
+        }
     }
 
     return {
