@@ -7,14 +7,16 @@ const metricsService = (MetricModel) => {
                 }
             },
         ])
-        .group({
-            _id: "$type"
-        })
+            .group({
+                _id: "$type"
+            })
         return metrics;
     }
 
     const getMetricByAgentId = async ({ id, type }) => {
-        const metric = await MetricModel.find({ agent: id, type }).select(["type", "value", "createdAt"])
+        const metric = await MetricModel.find({ agent: id, type })
+            .select(["type", "value", "createdAt"]).limit(20)
+            .sort({ createdAt: 'desc' })
         return metric
     }
 
