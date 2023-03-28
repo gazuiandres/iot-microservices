@@ -11,7 +11,8 @@ function setupController(service) {
     }
 
     async function createOrUpdate (req, res) {
-        res.send('is working')
+        const response = await service.createOrUpdate(req.body)
+        res.json(response)
     }
 
     return {

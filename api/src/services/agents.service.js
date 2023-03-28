@@ -1,18 +1,25 @@
-const agentsService = () => {
+const agentsService = (AgentModel) => {
     const getAll = async () => {
-        return {
-            data: []
-        }
+        const agents = await AgentModel.find()
+        return agents;
     }
 
-    const getOne = async ({ id }) => {
-        return {
-            id
-        }
+    const getOne = async ({ uuid }) => {
+        const agent = await AgentModel.findOne({ uuid })
+        return agent
     }
 
-    const createOrUpdate = () => {
+    const createOrUpdate = async (data) => {
+        const agent = await AgentModel.findOneAndUpdate({ uuid: data.uuid }, data, {
+            new: true,
+        })
 
+        if (agent) {
+            return agent
+        }
+
+        const newAgent = await AgentModel.create(data)
+        return newAgent
     }
 
 
