@@ -1,36 +1,36 @@
 const metricsService = (MetricModel) => {
-    const getTypesByAgentId = async ({ id }) => {
-        const metrics = await MetricModel.aggregate([
-            {
-                $match: {
-                    agent: id
-                }
-            },
-        ])
-            .group({
-                _id: "$type"
-            })
-        return metrics;
-    }
+  const getTypesByAgentId = async ({ uuid }) => {
+    const metrics = await MetricModel.aggregate([
+      {
+        $match: {
+          agent: uuid
+        }
+      },
+    ])
+      .group({
+        _id: "$type"
+      })
+    return metrics;
+  }
 
-    const getMetricByAgentId = async ({ id, type }) => {
-        const metric = await MetricModel.find({ agent: id, type })
-            .select(["type", "value", "createdAt"]).limit(20)
-            .sort({ createdAt: 'desc' })
-        return metric
-    }
+  const getMetricByAgentId = async ({ uuid, type }) => {
+    const metric = await MetricModel.find({ agent: uuid, type })
+      .select(["type", "value", "createdAt", "agent"]).limit(20)
+      .sort({ createdAt: 'desc' })
+    return metric
+  }
 
-    const create = async (data) => {
-        const newMetric = await MetricModel.create(data)
-        return newMetric
-    }
+  const create = async (data) => {
+    const newMetric = await MetricModel.create(data)
+    return newMetric
+  }
 
 
-    return {
-        getTypesByAgentId,
-        getMetricByAgentId,
-        create
-    }
+  return {
+    getTypesByAgentId,
+    getMetricByAgentId,
+    create
+  }
 }
 
 module.exports = metricsService

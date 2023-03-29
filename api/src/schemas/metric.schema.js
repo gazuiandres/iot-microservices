@@ -1,18 +1,18 @@
 const Joi = require("joi");
 Joi.objectId = require('joi-objectid')(Joi);
 
-const id = Joi.objectId()
+const uuid = Joi.string().min(4)
 const value = Joi.number();
 const type = Joi.string()
-const agent = Joi.objectId()
+const agent = Joi.string().min(4)
 
 const getTypesSchema = Joi.object({
-    id: id.required(),
+    uuid: uuid.required(),
 
 })
 
 const getFullMetricsSchema = Joi.object({
-    id: id.required(),
+    uuid: uuid.required(),
     type: type.required()
 })
 
