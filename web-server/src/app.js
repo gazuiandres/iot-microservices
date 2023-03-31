@@ -8,6 +8,7 @@ const setupRoutes = require('./routes')
 
 const agentSocket = require('./socket/agent.socket')
 const metricSocket = require('./socket/metric.socket')
+const setupMqtt = require('./mqtt')
 
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
@@ -31,5 +32,8 @@ const metricNameSpace = io.of("/metrics")
 
 agentSocket(agentNameSpace)
 metricSocket(metricNameSpace)
+
+// SETUP MQTT CONNECTION
+setupMqtt({ agentSocket: agentNameSpace, metricSocket: metricNameSpace })
 
 module.exports = httpServer
