@@ -15,7 +15,7 @@ const metricsService = (MetricModel) => {
 
   const getMetricByAgentId = async ({ uuid, type }) => {
     const metric = await MetricModel.find({ agent: uuid, type })
-      .select(["type", "value", "createdAt", "agent"]).limit(20)
+      .select(["type", "value", "createdAt", "agent"]).limit(11)
       .sort({ createdAt: 'desc' })
     return metric
   }
