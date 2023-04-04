@@ -5,7 +5,7 @@ class MqttManager {
   }
 
   async updateAgent(data) {
-    this.agentsSocket.in(data.uuid).emit("agent_updated", data)
+    this.agentsSocket.emit("agents_updated", data)
   }
 
   async addMetric({ agent, metrics }) {
