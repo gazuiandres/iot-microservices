@@ -1,14 +1,17 @@
 const mqtt = require('mqtt')
 const chalk = require('chalk')
 
+const { mqttHost } = require('../../config')
+
 const AgentModel = require('../../models/agent.model')
 const MetricModel = require('../../models/metric.model')
 const AgentsService = require('../../services/agents.service')
 const MetricService = require('../../services/metrics.service')
 const MqttManager = require('./mqttManager')
 
+
 module.exports = () => {
-  const sub = mqtt.connect('mqtt://localhost:9000')
+  const sub = mqtt.connect(mqttHost)
   console.log(chalk.yellow('[MQTT_CLIENT]: Connected to MQTT broker'))
 
   const agentsService = AgentsService(AgentModel)
