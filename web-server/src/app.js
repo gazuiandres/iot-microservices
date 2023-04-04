@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 
 
-const { boomErrorHandler } = require('./middlewares/error.handler')
+const { errorHandler } = require('./middlewares/error.handler')
 const setupRoutes = require('./routes')
 
 const agentSocket = require('./socket/agent.socket')
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 setupRoutes(app);
 
 // Init Error Middlewares
-app.use(boomErrorHandler)
+app.use(errorHandler)
 
 // Socket IO setup
 const agentNameSpace = io.of("/agents")
