@@ -1,7 +1,8 @@
 const aedes = require('aedes')();
 const chalk = require('chalk')
 const server = require('node:net').createServer(aedes.handle)
-const port = 9000
+
+const { PORT } = require('./config')
 
 const log = console.log
 
@@ -44,6 +45,6 @@ aedes.on('publish', function (packet, client) {
   }
 })
 
-server.listen(port, function () {
-  log(chalk.yellow(`[MQTT ON]: PORT ${port}`))
+server.listen(PORT, function () {
+  log(chalk.yellow(`[MQTT ON]: PORT ${PORT}`))
 })
