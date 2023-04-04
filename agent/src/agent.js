@@ -40,7 +40,8 @@ class Agent {
         for (const [metric, getValue] of this.metrics) {
           message.metrics.push({
             type: metric,
-            value: await getValue()
+            value: await getValue(),
+            createdAt: new Date()
           })
         }
 

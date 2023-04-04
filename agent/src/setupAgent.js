@@ -1,10 +1,13 @@
 const mqtt = require('mqtt')
 const chalk = require('chalk')
 const Agent = require('./agent')
-const randomValue = require('./utils/randomValue')
+const memoryUsed = require('./utils/memoryUsed')
+const batteryVoltage = require('./utils/batteryVoltage')
+
+const { mqttHost } = require('./config')
 
 module.exports = ({ name, uuid, interval }) => {
-  const pub = mqtt.connect('mqtt://localhost:9000')
+  const pub = mqtt.connect(mqttHost)
   console.log(chalk.green('[MQTT-CLIENT]: Connected to MQTT broker'))
   const agentService = new Agent({
     name,
@@ -14,8 +17,12 @@ module.exports = ({ name, uuid, interval }) => {
   })
 
   agentService.addMetric({
-    type: 'rv',
-    method: randomValue
+    type: 'ramUsed',
+    method: memoryUsed
+  })
+  agentService.addMetric({
+    type: 'batteryVoltage',
+    method: batteryVoltage
   })
 
   pub.on('connect', () => {
