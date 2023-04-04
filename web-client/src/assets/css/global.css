@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card__container {
+  @apply w-full py-3 cursor-pointer bg-white flex justify-between px-5 rounded-xl shadow-md mb-8 font-medium md:mb-10 lg:px-28
+}
+
+.card__statusContainer {
+  @apply flex items-center gap-3
+}
