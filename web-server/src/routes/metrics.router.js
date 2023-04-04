@@ -16,7 +16,6 @@ router.get('/:uuid', validatorHandler(getTypesSchema, 'params'), async (req, res
 router.get('/:type/:uuid', validatorHandler(getFullMetricsSchema, 'params'), async (req, res) => {
   const { uuid, type } = req.params
   const { data } = await axios.get(`${PROXY_API}/metrics/${type}/${uuid}`)
-  console.log(data.length)
   res.json(data)
 })
 

@@ -1,7 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const { Server } = require('socket.io')
 const { createServer } = require('node:http')
 const app = express()
+app.use(cors())
+
 
 const { boomErrorHandler } = require('./middlewares/error.handler')
 const setupRoutes = require('./routes')
